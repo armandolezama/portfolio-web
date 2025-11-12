@@ -1,42 +1,26 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/shared/card";
+import { Button } from "@/components/shared/button";
+import { Badge } from "@/components/shared/badge";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/shared/tabs";
+import { Input } from "@/components/shared/input";
+import { Switch } from "@/components/shared/switch";
+import { Label } from "@/components/shared/label";
 import { Github, Linkedin, Mail, Globe, ExternalLink, Filter } from "lucide-react";
 
-// =============================================================
-// PORTAFOLIO MÍNIMO — TypeScript + Cards genéricas (sin Growledge/EvoMind)
-// =============================================================
-// NOTA: Todo está en un único archivo para que puedas meter mano.
-//       *Sugerencia de modularización (cuando quieras dividirlo):
-//       - /components/portfolio/ProjectCard.tsx
-//       - /components/portfolio/ProjectsGrid.tsx
-//       - /components/portfolio/ProjectsTabs.tsx
-//       - /components/portfolio/ProjectsButtons.tsx
-//       - /sections/About.tsx
-//       - /pages/PortfolioMinimal.tsx
-//       Mantener aquí por ahora simplifica la edición.
-
-// —— Modelo de datos para las Cards ——
 export type Category = "Web" | "Data" | "IA" | "AWS";
 
 export interface Project {
   id: string;
-  title: string;        // Título de la card
-  blurb: string;        // Descripción breve (1 línea)
-  link?: string;        // URL demo (opcional)
-  repo?: string;        // URL repo (opcional)
-  category: Category;   // Categoría
-  tech: string[];       // Tecnologías (badges)
+  title: string;
+  blurb: string;
+  link?: string;
+  repo?: string;
+  category: Category;
+  tech: string[];
 }
 
-// —— Arreglo con objetos que alimentan las Cards ——
-//    *Sin referencias a Growledge/EvoMind ni proyectos personales sensibles*
 const PROJECTS: Project[] = [
   {
     id: "p-generic-1",
@@ -78,7 +62,6 @@ const PROJECTS: Project[] = [
 
 const CATEGORIES = ["Todos", "Web", "Data", "IA", "AWS"] as const;
 
-// —— Card de proyecto ——
 function ProjectCard({ p }: { p: Project }) {
   return (
     <motion.div layout initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }}>
@@ -113,7 +96,6 @@ function ProjectCard({ p }: { p: Project }) {
   );
 }
 
-// —— Grilla de proyectos con filtros ——
 function ProjectsGrid({ activeCategory, query }: { activeCategory: string; query: string }) {
   const q = query.trim().toLowerCase();
   const items = PROJECTS.filter((p) =>
@@ -135,7 +117,6 @@ function ProjectsGrid({ activeCategory, query }: { activeCategory: string; query
   );
 }
 
-// —— Navegación por Tabs ——
 function ProjectsTabs({ query, onQueryChange }: { query: string; onQueryChange: (v: string) => void }) {
   return (
     <Tabs defaultValue="Todos" className="w-full">
@@ -160,7 +141,6 @@ function ProjectsTabs({ query, onQueryChange }: { query: string; onQueryChange: 
   );
 }
 
-// —— Navegación por Botones ——
 function ProjectsButtons({ query, onQueryChange, active, setActive }: { query: string; onQueryChange: (v: string) => void; active: string; setActive: (v: string) => void; }) {
   return (
     <div className="w-full">
@@ -182,7 +162,6 @@ function ProjectsButtons({ query, onQueryChange, active, setActive }: { query: s
   );
 }
 
-// —— Sección About mínima (profesional genérico) ——
 function About() {
   return (
     <section id="about" className="max-w-5xl mx-auto px-4 py-10">
@@ -208,7 +187,6 @@ function About() {
   );
 }
 
-// —— Layout principal ——
 export default function PortfolioMinimal() {
   const [modeTabs, setModeTabs] = React.useState(true); // true = Tabs, false = Botones
   const [activeBtn, setActiveBtn] = React.useState("Todos");
@@ -216,7 +194,6 @@ export default function PortfolioMinimal() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Header */}
       <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/70 border-b">
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
           <a href="#" className="font-semibold tracking-tight">Armando · Portafolio</a>
@@ -228,10 +205,8 @@ export default function PortfolioMinimal() {
         </div>
       </header>
 
-      {/* About */}
       <About />
 
-      {/* Switch de modo de navegación */}
       <section id="projects" className="max-w-6xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-4">
           <div>
@@ -252,7 +227,6 @@ export default function PortfolioMinimal() {
         )}
       </section>
 
-      {/* Contacto mínimo */}
       <section id="contacto" className="max-w-6xl mx-auto px-4 pb-12">
         <Card className="border border-border/60">
           <CardHeader>
@@ -267,7 +241,6 @@ export default function PortfolioMinimal() {
         </Card>
       </section>
 
-      {/* Footer */}
       <footer className="py-8 text-center text-xs text-muted-foreground">
         <a href="#" className="inline-flex items-center gap-1 hover:underline">
           Hecho con React, Tailwind y shadcn/ui <ExternalLink className="w-3 h-3" />
