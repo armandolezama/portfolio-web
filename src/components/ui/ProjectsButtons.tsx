@@ -1,5 +1,5 @@
 import ProjectsGrid from "@/components/ui/ProjectsGrid";
-import { Button } from "@/components/shared/button";
+import Button from "@/components/shared/button";
 import { Input } from "@/components/shared/input";
 import { Filter } from "lucide-react";
 import type { Project } from "@types/index";

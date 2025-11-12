@@ -2,9 +2,9 @@ import type { Project } from "@types/index";
 import ProjectCard from "@/components/ui/ProjectCard";
 import { AnimatePresence } from "framer-motion";
 
-const ProjectsGrid = ({ activeCategory, query, projects }: { activeCategory: string; query: string, projects: Project }) => {
+const ProjectsGrid = ({ activeCategory, query, projects }: { activeCategory: string; query: string, projects: Project[] }) => {
     const q = query.trim().toLowerCase();
-    const items = projects.filter((p) =>
+    const items = projects.filter((p: Project) =>
         (activeCategory === "Todos" || p.category === activeCategory) &&
         (q === "" || p.title.toLowerCase().includes(q) || p.blurb.toLowerCase().includes(q) || p.tech.join(" ").toLowerCase().includes(q))
     ) || [];

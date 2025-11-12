@@ -3,7 +3,7 @@ import ProjectsTabs from "@/components/ui/ProjectsTabs";
 import ProjectsButtons from "@/components/ui/ProjectsButtons";
 import About from "@/components/ui/About";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/shared/card";
-import { Button } from "@/components/shared/button";
+import Button from "@/components/shared/button";
 import { Switch } from "@/components/shared/switch";
 import { Label } from "@/components/shared/label";
 import { Github, Linkedin, Mail, ExternalLink } from "lucide-react";
@@ -50,7 +50,7 @@ const projects: Project[] = [
 
 const categories = ["Todos", "Web", "Data", "IA", "AWS"] as const;
 
-export default function App() {
+const App = () => {
   const [modeTabs, setModeTabs] = useState(true); // true = Tabs, false = Botones
   const [activeBtn, setActiveBtn] = useState("Todos");
   const [query, setQuery] = useState("");
@@ -112,3 +112,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;

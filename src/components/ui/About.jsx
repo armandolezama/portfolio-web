@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Button } from "@/components/shared/button";
+import Button from "@/components/shared/button";
 import { Github, Linkedin, Mail, Globe } from "lucide-react";
 
 const About = () => {

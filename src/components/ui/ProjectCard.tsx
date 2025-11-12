@@ -1,12 +1,9 @@
-import { Badge } from "@/components/shared/badge";
-import { motion, AnimatePresence } from "framer-motion";
+import Badge from "@/components/shared/badge";
+import { motion, } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/shared/card";
-import { Button } from "@/components/shared/button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/shared/tabs";
-import { Input } from "@/components/shared/input";
-import { Switch } from "@/components/shared/switch";
-import { Label } from "@/components/shared/label";
-import { Github, Linkedin, Mail, Globe, ExternalLink, Filter } from "lucide-react";
+import Button from "@/components/shared/button";
+import { Github, Globe } from "lucide-react";
+import type { Project } from "@types/index";
 
 const ProjectCard = ({ p }: { p: Project }) => {
   return (
@@ -17,7 +14,7 @@ const ProjectCard = ({ p }: { p: Project }) => {
           <CardDescription>{p.blurb}</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-wrap gap-2">
-          {p.tech.map((t: any) => (
+          {p.tech.map((t: string) => (
             <Badge key={t} variant="secondary" className="rounded-full">{t}</Badge>
           ))}
         </CardContent>
