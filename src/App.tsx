@@ -1,13 +1,12 @@
 import React from "react";
-import ProjectsGrid from "@/components/ui/ProjectsGrid";
 import ProjectsTabs from "@/components/ui/ProjectsTabs";
+import ProjectsButtons from "@/components/ui/ProjectsButtons";
 import { motion } from "framer-motion";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/shared/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/shared/card";
 import { Button } from "@/components/shared/button";
-import { Input } from "@/components/shared/input";
 import { Switch } from "@/components/shared/switch";
 import { Label } from "@/components/shared/label";
-import { Github, Linkedin, Mail, Globe, ExternalLink, Filter } from "lucide-react";
+import { Github, Linkedin, Mail, Globe, ExternalLink } from "lucide-react";
 import type { Project } from "./types";
 
 const projects: Project[] = [
@@ -50,27 +49,6 @@ const projects: Project[] = [
 ];
 
 const categories = ["Todos", "Web", "Data", "IA", "AWS"] as const;
-
-function ProjectsButtons({ query, onQueryChange, active, setActive }: { query: string; onQueryChange: (v: string) => void; active: string; setActive: (v: string) => void; }) {
-  return (
-    <div className="w-full">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-3">
-        <div className="flex flex-wrap gap-2">
-          {CATEGORIES.map((c) => (
-            <Button key={c} onClick={() => setActive(c)} size="sm" variant={active === c ? "default" : "outline"} className="rounded-full">
-              {c}
-            </Button>
-          ))}
-        </div>
-        <div className="flex items-center gap-2 w-full md:w-72">
-          <Filter className="w-4 h-4" />
-          <Input placeholder="Buscar proyectos…" value={query} onChange={(e) => onQueryChange(e.target.value)} />
-        </div>
-      </div>
-      <ProjectsGrid activeCategory={active} query={query} projects={projects}/>
-    </div>
-  );
-}
 
 function About() {
   return (
