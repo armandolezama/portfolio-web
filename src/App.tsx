@@ -1,9 +1,9 @@
 import React from "react";
 import ProjectsGrid from "@/components/ui/ProjectsGrid";
+import ProjectsTabs from "@/components/ui/ProjectsTabs";
 import { motion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/shared/card";
 import { Button } from "@/components/shared/button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/shared/tabs";
 import { Input } from "@/components/shared/input";
 import { Switch } from "@/components/shared/switch";
 import { Label } from "@/components/shared/label";
@@ -49,31 +49,7 @@ const projects: Project[] = [
   },
 ];
 
-const CATEGORIES = ["Todos", "Web", "Data", "IA", "AWS"] as const;
-
-function ProjectsTabs({ query, onQueryChange }: { query: string; onQueryChange: (v: string) => void }) {
-  return (
-    <Tabs defaultValue="Todos" className="w-full">
-      <div className="flex items-center justify-between gap-3 mb-3">
-        <TabsList className="grid grid-cols-5 w-full md:w-auto">
-          {CATEGORIES.map((c) => (
-            <TabsTrigger key={c} value={c}>{c}</TabsTrigger>
-          ))}
-        </TabsList>
-        <div className="flex items-center gap-2 w-full md:w-72">
-          <Filter className="w-4 h-4" />
-          <Input placeholder="Buscar proyectos…" value={query} onChange={(e) => onQueryChange(e.target.value)} />
-        </div>
-      </div>
-
-      {CATEGORIES.map((c) => (
-        <TabsContent key={c} value={c} className="mt-2">
-          <ProjectsGrid activeCategory={c} query={query} projects={projects} />
-        </TabsContent>
-      ))}
-    </Tabs>
-  );
-}
+const categories = ["Todos", "Web", "Data", "IA", "AWS"] as const;
 
 function ProjectsButtons({ query, onQueryChange, active, setActive }: { query: string; onQueryChange: (v: string) => void; active: string; setActive: (v: string) => void; }) {
   return (
@@ -155,7 +131,7 @@ export default function App() {
         </div>
 
         {modeTabs ? (
-          <ProjectsTabs query={query} onQueryChange={setQuery} />
+          <ProjectsTabs query={query} onQueryChange={setQuery} categories={categories} projects={projects} />
         ) : (
           <ProjectsButtons query={query} onQueryChange={setQuery} active={activeBtn} setActive={setActiveBtn} />
         )}
