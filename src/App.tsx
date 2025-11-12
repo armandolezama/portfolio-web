@@ -8,18 +8,7 @@ import { Input } from "@/components/shared/input";
 import { Switch } from "@/components/shared/switch";
 import { Label } from "@/components/shared/label";
 import { Github, Linkedin, Mail, Globe, ExternalLink, Filter } from "lucide-react";
-
-export type Category = "Web" | "Data" | "IA" | "AWS";
-
-export interface Project {
-  id: string;
-  title: string;
-  blurb: string;
-  link?: string;
-  repo?: string;
-  category: Category;
-  tech: string[];
-}
+import type { Project } from "./types";
 
 const PROJECTS: Project[] = [
   {
@@ -187,7 +176,7 @@ function About() {
   );
 }
 
-export default function PortfolioMinimal() {
+export default function App() {
   const [modeTabs, setModeTabs] = React.useState(true); // true = Tabs, false = Botones
   const [activeBtn, setActiveBtn] = React.useState("Todos");
   const [query, setQuery] = React.useState("");
