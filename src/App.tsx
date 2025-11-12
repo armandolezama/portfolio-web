@@ -1,6 +1,6 @@
 import React from "react";
-import ProjectCard from "@/components/ui/ProjectCard";
-import { motion, AnimatePresence } from "framer-motion";
+import ProjectsGrid from "@/components/ui/ProjectsGrid";
+import { motion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/shared/card";
 import { Button } from "@/components/shared/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/shared/tabs";
@@ -10,7 +10,7 @@ import { Label } from "@/components/shared/label";
 import { Github, Linkedin, Mail, Globe, ExternalLink, Filter } from "lucide-react";
 import type { Project } from "./types";
 
-const PROJECTS: Project[] = [
+const projects: Project[] = [
   {
     id: "p-generic-1",
     title: "Starter Full‑Stack — Auth + CRUD",
@@ -51,27 +51,6 @@ const PROJECTS: Project[] = [
 
 const CATEGORIES = ["Todos", "Web", "Data", "IA", "AWS"] as const;
 
-function ProjectsGrid({ activeCategory, query }: { activeCategory: string; query: string }) {
-  const q = query.trim().toLowerCase();
-  const items = PROJECTS.filter((p) =>
-    (activeCategory === "Todos" || p.category === activeCategory) &&
-    (q === "" || p.title.toLowerCase().includes(q) || p.blurb.toLowerCase().includes(q) || p.tech.join(" ").toLowerCase().includes(q))
-  );
-  return (
-    <AnimatePresence mode="popLayout">
-      {items.length === 0 ? (
-        <p className="text-muted-foreground">No hay resultados. Ajusta filtros o búsqueda.</p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {items.map((p) => (
-            <ProjectCard key={p.id} p={p} />
-          ))}
-        </div>
-      )}
-    </AnimatePresence>
-  );
-}
-
 function ProjectsTabs({ query, onQueryChange }: { query: string; onQueryChange: (v: string) => void }) {
   return (
     <Tabs defaultValue="Todos" className="w-full">
@@ -89,7 +68,7 @@ function ProjectsTabs({ query, onQueryChange }: { query: string; onQueryChange: 
 
       {CATEGORIES.map((c) => (
         <TabsContent key={c} value={c} className="mt-2">
-          <ProjectsGrid activeCategory={c} query={query} />
+          <ProjectsGrid activeCategory={c} query={query} projects={projects} />
         </TabsContent>
       ))}
     </Tabs>
@@ -112,7 +91,7 @@ function ProjectsButtons({ query, onQueryChange, active, setActive }: { query: s
           <Input placeholder="Buscar proyectos…" value={query} onChange={(e) => onQueryChange(e.target.value)} />
         </div>
       </div>
-      <ProjectsGrid activeCategory={active} query={query} />
+      <ProjectsGrid activeCategory={active} query={query} projects={projects}/>
     </div>
   );
 }
