@@ -6,13 +6,13 @@ import { cn, badgeVariants } from "@/lib/utils"
 
 
 
-function Badge({
+const Badge = ({
   className,
   variant,
   asChild = false,
   ...props
 }: React.ComponentProps<"span"> &
-  VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+  VariantProps<typeof badgeVariants> & { asChild?: boolean }) => {
   const Comp = asChild ? Slot : "span"
 
   return (
