@@ -6,5 +6,6 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  resolve: { alias: { "@":  path.resolve(__dirname, "./src") } } // para tus imports "@/..."
+  resolve: { alias: { "@":  path.resolve(__dirname, "./src") } }, // para tus imports "@/..."
+  base: "/portfolio-web/",
 });
